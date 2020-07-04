@@ -1,0 +1,24 @@
+<div>
+  <h3>Log a new training session: </h3>
+</div>
+
+<div>
+  <p>Date: <input id="dateInput" value="{{today | date}}">   <button>Change Date</button></p>
+
+  <div *ngFor="let climb of climbsInSession">
+    <p>{{climb.climbId}}. Climb Grade: V{{climb.grade}} | # of Attempts: {{climb.attempts}}</p>
+  </div>
+  <div *ngIf="climbsInSession.length">
+    <p *ngIf="flashGrades.length">Average Flash Grade: V{{avgFlashGrade | number : '1.0-1' }}</p>
+    <p>Average Grade: V{{avgGrade | number : '1.0-1' }}</p>
+    <p>Max Grade: V{{maxGrade}}</p>
+  </div>
+
+  <p>Grade: <input #grade type="number" max="20" min="-1" length=2> Attempts: <input #attempts type="number" max="100" min="0" length=2>
+    <button (click)="addToClimbsInSession(grade.valueAsNumber, attempts.valueAsNumber)">Save Climb</button>
+  </p>
+</div>
+
+<div>
+<button> Save Session </button> <button (click)="clearSession()"> Clear Session </button>
+</div>
